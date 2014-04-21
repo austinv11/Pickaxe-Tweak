@@ -18,12 +18,14 @@ public class ItemSearcher {
 		if (r == true){
 			return k;
 		}else{
-			for (int i =  slot; i < 9; i++){
-				if (player.getInventory().getItem(i).getType() == Material.TORCH){
-					return i;
+			for (int i = k; i < 9; i++){
+				if (player.getInventory().getItem(i).getType() != null){
+					if (player.getInventory().getItem(i).getType() == Material.TORCH){
+						return i;
+					}
 				}
 			}
+			return 0;
 		}
-		return 0;
 	}
 }
