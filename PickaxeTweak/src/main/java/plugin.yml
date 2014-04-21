@@ -1,0 +1,23 @@
+name: PickaxeTweak
+version: 1.0.0
+description: A plugin which allows vanilla pickaxes to place blocks like in the Tinker’s Construct mod
+author: austinv11
+website: austinv11.github.io
+ 
+main: io.github.austinv11.PickaxeTweak.PickaxeTweak
+commands:
+   tweaks:
+      description: Displays the tweaks implemented by LootPlus on the server
+      usage: /<command>
+      permission: LootPlus.tweaks
+      permission-message: You don't have permission
+      aliases: [tweak, change, changes]
+
+permissions:
+   PickaxeTweak.*:
+        description: Gives access to all LootPlus commands
+        children:
+            PickaxeTweak.tweaks: true
+   PickaxeTweak.tweaks:
+      description: Displays the tweaks implemented by LootPlus on the server
+      default: true
