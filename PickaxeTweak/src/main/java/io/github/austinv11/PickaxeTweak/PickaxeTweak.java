@@ -12,6 +12,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class PickaxeTweak extends JavaPlugin implements Listener{
@@ -63,15 +65,29 @@ public class PickaxeTweak extends JavaPlugin implements Listener{
 				Material item = event.getPlayer().getInventory().getItem(usableSlot).getType();
 				Location loc = event.getClickedBlock().getLocation().clone();
 				Location placement = calc.getLoc(event.getBlockFace(), loc);
-				if (placement != null && usableSlot != 0 && item != Material.AIR){
+				if (placement != null && usableSlot != 0 && item != Material.AIR && item != null){
 					placement.getBlock().setType(item);
+					int itemNum = event.getPlayer().getInventory().getItem(usableSlot).getAmount();
+					if (itemNum == 1){
+						ItemStack clear = new ItemStack (Material.AIR);
+						event.getPlayer().getInventory().setItem(usableSlot, clear);
+						event.getPlayer().updateInventory();//FIXME
+					}else{
+						event.getPlayer().getInventory().getItem(usableSlot).setAmount(itemNum - 1);
+						event.getPlayer().updateInventory(); //FIXME
+					}
 				}
 			}
 		}
 	}
+	@EventHandler(priority = EventPriority.HIGH)
+	public void onLogin(PlayerJoinEvent event){
+		event.getPlayer().sendMessage("This server has the PickaxeTweak plugin installed, to learn how to use it, use the /pt-about command");
+	}
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (cmd.getName().equalsIgnoreCase("basic")) {
+		if (cmd.getName().equalsIgnoreCase("pt-about")) {
+			sender.sendMessage("With the PickaxeTweak plugin installed, when you right click with a pickaxe in hand, you will use the item to the right of the pickaxe, just like in the Tinkers' Construct mod");
 			return true;
 		}
 		return false;

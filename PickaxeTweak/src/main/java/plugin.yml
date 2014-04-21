@@ -6,18 +6,18 @@ website: austinv11.github.io
  
 main: io.github.austinv11.PickaxeTweak.PickaxeTweak
 commands:
-   tweaks:
-      description: Displays the tweaks implemented by LootPlus on the server
+   pt-about:
+      description: Explains how to use this plugin
       usage: /<command>
-      permission: LootPlus.tweaks
+      permission: PickaxeTweak.pt-about
       permission-message: You don't have permission
-      aliases: [tweak, change, changes]
+      aliases: [ptabout, aboutpt, about-pt]
 
 permissions:
    PickaxeTweak.*:
         description: Gives access to all LootPlus commands
         children:
-            PickaxeTweak.tweaks: true
-   PickaxeTweak.tweaks:
-      description: Displays the tweaks implemented by LootPlus on the server
+            PickaxeTweak.pt-about: true
+   PickaxeTweak.pt-about:
+      description: Explains how to use this plugin
       default: true
